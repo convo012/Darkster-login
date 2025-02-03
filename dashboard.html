@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Welcome to Dark Rulex Convo spam tool</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>      
+        <style>
+          
+        #items {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            }
+        .text  {
+            width: 85vmin;
+            height: 10em;
+            border-radius: 10px;
+            outline: none;
+            margin-top: 10px;
+            box-shadow: 0 0 10px #000000;
+            border: none;
+            resize: none;
+            opacity: 0.5;
+            color: #ff0000 !important;
+          textarea::placeholder {
+            color: #ff0000 !important;
+          }
+        }
+        body {
+    
+      font-family: Arial, sans-serif;
+      background-image: url('spider.jpg');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+          width: 100%;
+          height: 100%;
+          color: #ffffff;
+        }
+          </style>
+    </head>
+    <body>
+             <div style="margin-top: 60px;"></div>
+              <div id="items" style="margin-top: 10px;">
+                  <div style="border-radius: 20px; box-shadow: 0 0 20px #000000; height: 100%; width: 95vmin;">
+                      <h2 style="text-align: center; margin-top: 10px; ">Facebook Messenger Tool By Darkster</h2>
+                      <hr>
+                      <h3 style="margin-top: 10px; margin-left: 20px;">targetID</h3>
+                        <hr>
+                        <div id="items">
+                            <textarea class="text" id="targetid" placeholder="" style="height: 1.7em;"></textarea>
+                        </div>
+                        <hr>
+                        <h3 style="margin-top: 10px; margin-left: 20px;">Token</h3>
+                        <hr>
+                        <div id="items">
+                            <textarea class="text" id="appstate" placeholder="">["token1","token2", "token3", "token4"]</textarea>
+                        </div>
+                        <hr>
+                        <h3 style="margin-top: 10px; margin-left: 20px;">Timer</h3>
+                        <hr>
+                        <div id="items">
+                            <textarea class="text" id="timer" style="height: 1.7em;" placeholder="60">60</textarea>
+                        </div>
+                        <hr>
+                        <h3 style="margin-top: 10px; margin-left: 20px;">Message</h3>
+                        <hr>
+                        <div id="items">
+                              <textarea class="text" id="msg" style="height: 7em;" placeholder='["msg1", "msg2", "msg3", "msg4"]'>["Msg", "Msg2", "Msg3", "Msg4"]</textarea>
+                        </div>
+                        <hr>
+                        <h3 style="margin-top: 10px; margin-left: 20px;">Key</h3>
+                        <hr>
+                        <div id="items">
+                            <textarea class="text" id="key" style="height: 1.7em;" placeholder=""></textarea>
+                        </div>
+                        <hr>
+                        <div id="items" style="margin-top: 20px; padding-bottom: 15px;">
+                            <button type="button" class="btn btn-success" onClick="submit()">Submit</button>
+                    </div>
+                </div>
+            </div>
+            <div style="margin-top: 20px;"></div>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+        <script>
+            function submit() {
+              let targetid = document.getElementById("targetid").value.trim();
+                try {
+                   appstate = JSON.parse(document.getElementById("appstate").value);
+                   if(!Array.isArray(appstate))  return Swal.fire("Submit failed","Your appstate is not valid format", "error");
+                } catch {
+                    return Swal.fire("Submit failed","Your appstate is not valid format", "error");
+                }
+              let timer = parseInt(document.getElementById("timer").value);
+              let msg;
+              try {
+                 msg = JSON.parse(document.getElementById("msg").value);
+                 if(!Array.isArray(msg)) return alert("Your text is not valid format");
+              } catch {
+                  return Swal.fire("Submit failed","Your text is not valid format", "error");
+              }
+              let key = document.getElementById("key").value.trim();
+              if(targetid == "") return Swal.fire("Submit failed","You must put TargetID", "error");
+              if(key == "") return Swal.fire("Submit failed","You must put keys", "error");
+              if (isNaN(timer) || timer < 10) return Swal.fire("Submit failed", "The timer should be a number and at least 10 seconds", "error");
+
+              fetch("/login", { method: "POST", headers: {  'Content-Type': 'application/json' }, body: JSON.stringify({targetid, msg, timer, appstate, key})})
+  .then(a => a.json()).then(a => {
+      if(a.success == true) {
+          return Swal.fire("Submit successfully","Successfully submitted form", "success");
+      } else {
+          return Swal.fire("Submit failed","You are unable to use spam tool, \nPossible reasons : Your key is not valid or your target id or login id banned by System, Thanks", "error");
+    }
+})
+            }
+        </script>
+    </body>
+</html>
+<div class="footer">
+  <p>&copy; Developed By Darkster</p>
+  <p><a href="https://www.facebook.com/deadllydude" target="_blank">Yogesh Sharma </a></p>
+  <p><a href="https://www.facebook.com/t3ra.b44p.Anup.h3r3?mibextid=ZbWKwL" target="_blank">Anup Kumar</a></p>
+  <div class="social-icons">
+    <a href="https://github.com/Anupx0" target="_blank"><i class="fa fa-github fa-inverse"></i></a>
+    <a href="https://www.facebook.com/t3ra.b44p.Anup.h3r3" target="_blank"><i class="fa fa-facebook fa-inverse"></i></a>
+    <a href="https://www.instagram.com/anup.x3/" target="_blank"><i class="fa fa-instagram fa-inverse"></i></a>
+  </div>
+  <p>&copy; 2023 All rights reserved</p>
+</div>
+</div>
+</body>          
+<script src="https://cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/0x3EF8/Live2D-v1.0@master/autoload.js"></script>
+  <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+<script>
